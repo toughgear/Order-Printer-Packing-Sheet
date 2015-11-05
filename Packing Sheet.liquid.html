@@ -65,7 +65,8 @@
       {% if line_item.quantity > 1 %}
       <strong>{{ line_item.quantity }}</strong>
       {% else %}
-       {{ line_item.quantity }}
+       {{ line_item.quantity }}<br>
+       {{ line_item.product.featured_image | product_img_url: 'small' | img_tag }}
       {% endif %}
        </td>
         <td valign=top style="line-height: 150%; padding: 15px 15px 0 10px;">
