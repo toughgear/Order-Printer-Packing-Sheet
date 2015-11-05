@@ -1,19 +1,18 @@
 <table cellpadding=0 cellspacing=0 width=100%>
   <tr>
-    <td valign=top>
-      <div style="display: block !important; padding: 0px; background-color: #fff;" >
+    <td valign=middle>
+      <div style="display: block !important; padding: 10px;">
         <strong style="font-size: 36pt">{{ order_name }}</strong><br />
         <span style="font-size: 16pt;">{{ created_at | date: "%A, %B %-d, %Y <br>%I:%M %p" }}<br /></span>
       </div>
     </td>
-    <td valign=top >
-      <img align="right" src="https://cdn.shopify.com/s/files/1/0643/4043/files/packing-sheet-logo.jpg?4374" />
+    <td valign=top style="padding-bottom: 10px;" >
+      <img align="right" src="https://cdn.shopify.com/s/files/1/0643/4043/files/packing_sheet_logo.jpg?9539006362626716064" width="300" />
     </td>
   </tr>
 </table>
-<br />
 {% if shipping_address %}
-<div style="padding: 10px; background-color: #eee; border: 1px solid #ddd;">
+<div style="padding: 10px;">
   <table cellpadding=0 cellspacing=0  width=100%>
     <tr>
       <td>
@@ -30,8 +29,12 @@
         </div>
       </td>
       <td valign=top align=right>
-        <div style="font-size: 14pt; line-height: 110%;">
-          {{ shipping_method.title }}
+        <div style="font-size: 14pt; line-height: 110%;">Shipping: 
+          {% if shipping_method.title contains 'USPS' or shipping_method.title contains 'UPS' %}
+            <strong>{{ shipping_method.title }}</strong>
+          {% else %}
+            {{ shipping_method.title }}
+          {% endif %}
         </div>
       </td>
     </tr>
@@ -39,13 +42,12 @@
 </div>
 {% endif %}
 <br />
-<br />
-<div style="font-size: 12pt;  padding: 10px; background-color: #eee; ">
-  <table border=1 bordercolor=#ddd style="width: 100%;">
+<div style="font-size: 12pt;">
+  <table style="width: 100%; border: 1px solid black;">
     <thead>
-      <tr style="height: 30px;">
-        <th style="text-align: center;">Qty</th>
-        <th> </th>
+      <tr style="height: 30px; background-color: black; border-color: black;">
+        <th style="text-align: center; color: white; padding: 10px;">Qty</th>
+        <th style="color: white; padding: 10px;">Item</th>
       </tr>
     </thead>
     <tbody>
@@ -54,8 +56,13 @@
 
       {% unless line_item.title contains 'Active Edge' or line_item.title contains 'Stainless' or line_item.title contains 'Swivel' or line_item.title contains 'Center Line' %}
       <tr style="border-bottom: 1px dashed black;">
-      <td valign=top style="width: 40px; line-height: 150%; text-align: center;">{{ line_item.quantity }}</td>
-        <td valign=top style="line-height: 150%;"><b>{{ line_item.title }}</b><br />
+      <td valign=top style="width: 40px; line-height: 150%; text-align: center; padding: 15px;">
+      {% if line_item.quantity > 1 %}<strong>{{ line_item.quantity }}</strong>
+      {% else %}
+       {{ line_item.quantity }}
+      {% endif %}
+       </td>
+        <td valign=top style="line-height: 150%; padding: 15px 15px 0 10px"><b>{{ line_item.title }}</b>
           <ul>
 
             {% for p in line_item.properties %}
@@ -63,9 +70,9 @@
             {% unless p.last == blank %}
 
             {% if p.first contains 'Active Edge' or p.first contains 'Swivel' or p.first contains 'Center Line' %}
-            <li style="list-style-type: circle; line-height: 2em;"><b>{{ p.first }}:</b> {{ p.last }}</li>
+            <li style="list-style-type: dot; line-height: 2em;"><b>{{ p.first }}:</b> {{ p.last }}</li>
             {% else %}
-            <li style="list-style-type: none; line-height: 2em;"><span style="text-decoration: underline;">{{ p.first }}</span>: {{ p.last }}</li>
+            <li style="list-style-type: circle; line-height: 2em;"><span style="text-decoration: underline;">{{ p.first }}</span>: {{ p.last }}</li>
             {% endif %}
 
             {% endunless %}
