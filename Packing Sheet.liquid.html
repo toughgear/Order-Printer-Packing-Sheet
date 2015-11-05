@@ -33,7 +33,7 @@
           {{ shipping_address.country }}
         </div>
       </td>
-      <td align=right style="padding-top: 15px;" width="40%">
+      <td align=right width="40%">
         <div style="font-size: 14pt; line-height: 110%;">Shipping: 
           {% if shipping_method.title contains 'USPS' or shipping_method.title contains 'UPS' %}
             <strong>{{ shipping_method.title }}</strong>
@@ -60,7 +60,7 @@
       {% for line_item in line_items %}
 
       {% unless line_item.title contains 'Active Edge' or line_item.title contains 'Stainless' or line_item.title contains 'Swivel' or line_item.title contains 'Center Line' %}
-      <tr style="border-bottom: 1px dashed black; page-break-inside: avoid;">
+      <tr style="border-bottom: 1px dashed black;">
       <td valign=top style="width: 40px; line-height: 150%; text-align: center; padding: 15px;">
       {% if line_item.quantity > 1 %}
       <strong>{{ line_item.quantity }}</strong>
@@ -69,7 +69,7 @@
       {% endif %}
        </td>
         <td valign=top style="line-height: 150%; padding: 15px 15px 0 10px;">
-        <div style="display: block; page-break-inside: avoid;">
+        <div style="display: block;">
              <b>{{ line_item.title }}</b>
               <ul>
              
