@@ -48,9 +48,9 @@
 {% endif %}
 <br />
 <div style="font-size: 12pt;">
-  <table style="width: 100%; border: 1px solid black;">
+  <table style="width: 100%; border: 1px solid #AAAAAA;">
     <thead>
-      <tr style="height: 30px; background-color: black; border-color: black;">
+      <tr style="height: 30px; background-color: black; border-color: #000000;">
         <th style="text-align: center; color: white; padding: 10px;">Qty</th>
         <th style="color: white; padding: 10px;">Item</th>
       </tr>
@@ -60,17 +60,16 @@
       {% for line_item in line_items %}
 
       {% unless line_item.title contains 'Active Edge' or line_item.title contains 'Stainless' or line_item.title contains 'Swivel' or line_item.title contains 'Center Line' %}
-      <tr style="border-bottom: 1px dashed black;">
-      <td valign=top style="width: 40px; line-height: 150%; text-align: center; padding: 15px;">
+      <tr style="border-bottom: 1px dashed #AAAAAA;">
+      <td valign=top style="width: 50px; line-height: 150%; text-align: center; padding: 15px 0 20px 10px;">
       {% if line_item.quantity > 1 %}
       <strong>{{ line_item.quantity }}</strong>
       {% else %}
-       {{ line_item.quantity }}<br>
+       {{ line_item.quantity }}<br><br>
        {{ line_item.product.featured_image | product_img_url: 'small' | img_tag }}
       {% endif %}
        </td>
-        <td valign=top style="line-height: 150%; padding: 15px 15px 0 10px;">
-        <div style="display: block;">
+        <td valign=top style="line-height: 150%; padding: 15px 15px 10px 10px;">
              <b>{{ line_item.title }}</b>
               <ul>
              
@@ -79,7 +78,7 @@
                 {% unless p.last == blank %}
              
                 {% if p.first contains 'Active Edge' or p.first contains 'Swivel' or p.first contains 'Center Line' %}
-                <li style="list-style-type: dot; line-height: 2em;"><b>{{ p.first }}:</b> {{ p.last }}</li>
+                <li style="list-style-type: dot; line-height: 2em;"><b style="text-decoration: underline;">{{ p.first }}:</b> {{ p.last | remove: "(add. $2.00)" }}</li>
                 {% else %}
                 <li style="list-style-type: circle; line-height: 2em;"><span style="text-decoration: underline;">{{ p.first }}</span>: {{ p.last }}</li>
                 {% endif %}
@@ -89,7 +88,6 @@
                 {% endfor %}
              
               </ul>
-         </div>
         </td>
       </tr>
       {% endunless %}
