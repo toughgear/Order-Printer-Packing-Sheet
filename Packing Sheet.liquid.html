@@ -12,7 +12,7 @@
       </div>
     </td>
     <td valign=top>
-      <img align="right" src="https://cdn.shopify.com/s/files/1/0643/4043/files/packing_sheet_logo.jpg?9539006362626716064" width="300" />
+      <img align="right" src="https://cdn.shopify.com/s/files/1/0643/4043/files/packing_sheet_logo.jpg?9539006362626716064" width="275" />
     </td>
   </tr>
 </table>
@@ -59,9 +59,9 @@
 
       {% for line_item in line_items %}
 
-      {% unless line_item.title contains 'Active Edge' or line_item.title contains 'Stainless' or line_item.title contains 'Swivel' or line_item.title contains 'Center Line' %}
+      {% unless line_item.title contains 'Active Edge' or line_item.title contains 'Stainless' or line_item.title contains 'Swivel' or line_item.title contains 'Center Line' or line_item.title contains 'Gift Wrapping' %}
       <tr style="border-bottom: 1px dashed #AAAAAA;">
-      <td valign=top style="width: 50px; line-height: 150%; text-align: center; padding: 15px 0 20px 10px;">
+      <td valign=top style="width: 50px; line-height: 150%; text-align: center; padding: 15px 0 10px 10px;">
       {% if line_item.quantity > 1 %}
       <strong>{{ line_item.quantity }}</strong>
       {% else %}
@@ -74,17 +74,17 @@
               <ul>
              
                 {% for p in line_item.properties %}
-                {% if p.first == "builder_id" or p.first == "builder_info" or p.first == "master_builder" or p.last == "" %}{% else %}
-                {% unless p.last == blank %}
-             
-                {% if p.first contains 'Active Edge' or p.first contains 'Swivel' or p.first contains 'Center Line' %}
-                <li style="list-style-type: dot; line-height: 2em;"><b style="text-decoration: underline;">{{ p.first }}:</b> {{ p.last | remove: "(add. $2.00)" }}</li>
-                {% else %}
-                <li style="list-style-type: circle; line-height: 2em;"><span style="text-decoration: underline;">{{ p.first }}</span>: {{ p.last }}</li>
-                {% endif %}
-             
-                {% endunless %}
-                {% endif %}
+                    {% if p.first == "builder_id" or p.first == "builder_info" or p.first == "master_builder" or p.last == "" %}{% else %}
+                        {% unless p.last == blank %}
+
+                        {% if p.first contains 'Active Edge' or p.first contains 'Swivel' or p.first contains 'Center Line' or p.first contains 'Gift Wrapping' %}
+                            <li style="list-style-type: dot; line-height: 2em;"><b style="text-decoration: underline;">{{ p.first }}:</b> {{ p.last | remove: "(add. $2.00)" }}</li>
+                        {% else %}
+                            <li style="list-style-type: circle; line-height: 2em;"><span style="text-decoration: underline;">{{ p.first }}</span>: {{ p.last }}</li>
+                        {% endif %}
+
+                        {% endunless %}
+                    {% endif %}
                 {% endfor %}
              
               </ul>
