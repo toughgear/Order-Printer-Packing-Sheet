@@ -59,7 +59,7 @@
 
       {% for line_item in line_items %}
 
-      {% unless line_item.title contains 'Active Edge' or line_item.title contains 'Stainless' or line_item.title contains 'Swivel' or line_item.title contains 'Center Line' or line_item.title contains 'Gift Wrapping' %}
+      {% unless line_item.title contains 'Active Edge' or line_item.title contains 'Adjustable Stainless' or line_item.title contains 'Swivel' or line_item.title contains 'Center Line' or line_item.title contains 'Gift Wrapping' or line_item.title contains 'Cord Lock' or line_item.title contains 'Wholesale Paracord Length' %}
       <tr style="border-bottom: 1px dashed #AAAAAA;">
       <td valign=top style="width: 50px; line-height: 150%; text-align: center; padding: 15px 0 10px 10px;">
       {% if line_item.quantity > 1 %}
