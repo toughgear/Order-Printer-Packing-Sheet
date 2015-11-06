@@ -74,13 +74,17 @@
               <ul>
              
                 {% for p in line_item.properties %}
-                    {% if p.first == "builder_id" or p.first == "builder_info" or p.first == "master_builder" or p.last == "" %}{% else %}
+                    {% if p.first == "builder_id" or p.first == "builder_info" or p.first == "master_builder" or p.last == blank %}
+                        {% if p.first contains 'Active Edge' %}
+                            <li style="line-height: 2em; font-weight: bold; text-decoration: underline;">{{ p.first }}</li>
+                        {% endif %}
+                    {% else %}
                         {% unless p.last == blank %}
 
-                        {% if p.first contains 'Active Edge' or p.first contains 'Swivel' or p.first contains 'Center Line' or p.first contains 'Gift Wrapping' %}
-                            <li style="list-style-type: dot; line-height: 2em;"><b style="text-decoration: underline;">{{ p.first }}:</b> {{ p.last | remove: "(add. $2.00)" }}</li>
+                        {% if p.first contains 'Active Edge' or p.first contains 'Gift Wrapping' %}
+                            <li style="list-style-type: dot; line-height: 2em;"><b style="text-decoration: underline;">{{ p.first | remove: "($45)" }}:</b> {{ p.last }}</li>
                         {% else %}
-                            <li style="list-style-type: circle; line-height: 2em;"><span style="text-decoration: underline;">{{ p.first }}</span>: {{ p.last }}</li>
+                            <li style="list-style-type: circle; line-height: 2em;"><span style="text-decoration: underline;">{{ p.first }}</span>: {{ p.last | remove: "(add. $2.00)" }}</li>
                         {% endif %}
 
                         {% endunless %}
